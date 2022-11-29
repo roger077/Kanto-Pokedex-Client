@@ -1,0 +1,18 @@
+.inpSearch{
+    height: 25px;
+    border-radius: 5px;
+    border: none;
+}
+.btnSearch{
+    height: 30px;
+    border: solid 1px;
+    border-radius: 5px;
+    cursor:pointer;
+}
+.btnSearch:hover{
+    background-color: rgb(87,27,207);
+    color:rgb(231,68,145);
+}
+.searchContainer{
+    align-content: center;
+}

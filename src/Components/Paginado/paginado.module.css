@@ -1,0 +1,22 @@
+.paginadoContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin:10px;
+
+}
+.currentPag{
+    width: 40px;
+    background-color: cornflowerblue;
+    border-radius: 5px;
+    margin: 0px;
+}
+.currentPag:hover{
+    cursor: pointer;
+    background-color: darkcyan;
+}
+
+.currentPag:focus{
+    color: black; 
+    background-color: rgb(87,27,207);
+}

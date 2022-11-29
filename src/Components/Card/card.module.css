@@ -1,0 +1,32 @@
+.cardContainer{
+    display: block;
+    width: 250px;
+    padding: 0px;
+    background: rgb(231,68,145);
+    background: radial-gradient(circle, rgba(231,68,145) 0%, rgba(87,27,207) 90%);
+   /* border: black solid 5px;*/
+    border-radius: 13px;
+    border:none;
+    height: 350px;
+    color:rgb(0, 0, 0);
+    padding: 40px;
+    margin: 10px; 
+}
+.cardContainer img{ 
+    width: 225px;
+}
+
+.cardContainer ul{
+    padding-left: 0;
+    list-style: none;
+    text-align: left;
+    display:inline-block;
+    font-size: 19px;
+    letter-spacing: 1px;
+    font-family: 'Bungee', cursive;
+    
+}
+.cardContainer:hover{
+    cursor: pointer;
+    box-shadow: 0px 80px 80px rgb(0, 0, 0);
+}
