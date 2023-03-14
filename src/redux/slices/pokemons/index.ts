@@ -16,7 +16,7 @@ export interface porpSortPokemon{
     value:string
 }
 
-export const getPokemons=createAsyncThunk<Array<Pokemon>,RequestBack>(
+export const getPokemons=createAsyncThunk<Pokemon[],RequestBack>(
     "pokemon/getPokemons",
     async(reqBack, thunkApi)=>{
         try{
@@ -93,7 +93,8 @@ const pokeSlices = createSlice({
     extraReducers(builder){
 
         builder.addCase(getPokemons.pending, (state)=>{
-            return {...state, loading:true};
+            state.loading=true;
+
         })
         .addCase(getPokemons.fulfilled, (state,action)=>{
             state.pokemons=action.payload;

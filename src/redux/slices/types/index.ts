@@ -37,12 +37,12 @@ const typesSlices = createSlice({
     extraReducers(builder){
         builder.addCase(getTypes.pending, (state)=>{
             state.loading=true;
-        }),
-        builder.addCase(getTypes.fulfilled, (state,action)=>{
+        })
+        .addCase(getTypes.fulfilled, (state,action)=>{
             state.types=action.payload;
             state.loading=false;
-        }),
-        builder.addCase(getTypes.rejected, (state,action)=>{
+        })
+        .addCase(getTypes.rejected, (state,action)=>{
             state.loading=false;
             state.errors=action.payload;
         })
