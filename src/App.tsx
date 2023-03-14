@@ -6,7 +6,7 @@ import './App.css';
 import {Route,Routes} from 'react-router-dom'
 import axios from 'axios';
 function App() {
-  axios.defaults.baseURL="https://kanto-pokedex-api-production.up.railway.app"
+  axios.defaults.baseURL="https://kanto-pokedex-api-production.up.railway.app/pokemon"
   localStorage.setItem('requestBack',JSON.stringify({query:'',order:{}}))
   return (
     <div className="App">
