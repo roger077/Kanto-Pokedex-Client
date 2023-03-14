@@ -1,18 +1,32 @@
 .inpSearch{
-    height: 25px;
-    border-radius: 5px;
+    height: 1.6rem;
+    border-radius: 0.25rem;
     border: none;
 }
+
 .btnSearch{
-    height: 30px;
-    border: solid 1px;
-    border-radius: 5px;
+    height: 1.8rem;
+    font-family: 'VT323';
+    width: 5rem;
+    background-color: rgb(143, 2, 56);
+    color: antiquewhite;
+    border: none;
+    border-radius: 0.25rem;;
+    text-shadow: 1px 1px 1px black;
+    font-size: 1.5rem;
+    padding: 0;
     cursor:pointer;
 }
+
 .btnSearch:hover{
-    background-color: rgb(87,27,207);
-    color:rgb(231,68,145);
+    background-color: rgb(6, 148, 204);
+    color:rgb(143, 2, 56);
+    transition: 750ms;
+    text-shadow: 1px 1px 1px rgb(2, 80, 153);
 }
+
 .searchContainer{
-    align-content: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around; 
 }

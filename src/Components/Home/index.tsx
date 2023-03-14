@@ -8,11 +8,11 @@ import { useState } from 'react'
 import {getPokemons} from '../../redux/slices/pokemons/index'
 import { getTypes } from '../../redux/slices/types'
 import Paginado from '../Paginado'
-import { useParams } from 'react-router-dom'
-import { Pokemon } from '../../Interfaces/pokemon.interface'
+/*import { useParams } from 'react-router-dom'
+import { Pokemon } from '../../Interfaces/pokemon.interface'*/
 import { useLocalStorage } from '../../useLocalStorage'
 import { RequestBack } from '../../Interfaces/requestBack.interface'
-
+import Loading from '../Loading'
 //import { getItem } from '../../useLocalStorage'
 
 export default function Home(){
@@ -26,15 +26,13 @@ export default function Home(){
     const [reqStorage]=useLocalStorage<RequestBack>('requestBack',{query:'', order: ''});   
     
     useEffect(()=>{
-        dispatch(getPokemons(reqStorage?reqStorage:{query:'',order:''}))
+        dispatch(getPokemons(reqStorage||{query:'',order:''}))
         dispatch(getTypes())  
-            
     },[])
 
     useEffect(()=>{
         setPageStorage(currentPage)
     },[currentPage])
-
     const paginado = (page:number): void =>{
         setCurrentPage(page)
     }
@@ -53,6 +51,6 @@ export default function Home(){
                 PokemonsPerPage={pokemonsPerPage} 
                 paginado={paginado}
             />
-        </div>||<p>Loading...</p>
+        </div>|| <Loading/>
     )
 }

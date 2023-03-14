@@ -8,6 +8,7 @@ export interface Pokemon {
     height:number,
     attack:number,
     weight:number,
+    num:number,
     image:string,
     types:Type[]
 }

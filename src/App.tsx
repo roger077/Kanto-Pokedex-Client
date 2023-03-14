@@ -4,7 +4,9 @@ import Home from './Components/Home'
 import Details from './Components/Details';
 import './App.css';
 import {Route,Routes} from 'react-router-dom'
+import axios from 'axios';
 function App() {
+  axios.defaults.baseURL="https://kanto-pokedex-api-production.up.railway.app"
   localStorage.setItem('requestBack',JSON.stringify({query:'',order:{}}))
   return (
     <div className="App">

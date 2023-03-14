@@ -1,13 +1,14 @@
 .navbar{
     display: flex;
+    /* position: fixed; */
+  
     width: 100%;
     color:antiquewhite;
-    /* background-color: rgb(37, 37, 37); */
-    background-color: rgb(37, 37, 37);
+    background-color: rgb(20, 20, 20);
     align-items: center;
     justify-content: space-evenly;
     padding: 5px;
-    flex-direction: row;
+    /* flex-direction: row; */
     
 }
 

@@ -3,7 +3,7 @@ import style from './navbar.module.css';
 import imgTitle from './imgTitle.png';
 import SearchBar from '../SearchBar/index';
 import { useState } from 'react';
-import { getPokemons } from '../../redux/slices/pokemons';
+import { getPokemons, getAllPokemons } from '../../redux/slices/pokemons';
 import {  useAppSelector } from "../../redux/store";
 import { Queries } from '../../Interfaces/queries.interface';
 import { useAppDispatch } from '../../redux/store';
@@ -26,13 +26,15 @@ export default function Navbar({paginado}:Props){
     }
     
     const handleSort=(event: ChangeEvent<HTMLSelectElement>):void=>{
-        const order={
+        const reqOrder={
             name:event.target.name,
             value:event.target.value
         }
 
-        setItem('requestBack',{...requestBack,order:`${order.name}/${order.value}`})
-        dispatch(getPokemons({...requestBack,order:`${order.name}/${order.value}`}))
+        const order =`${reqOrder.name}/${reqOrder.value}`
+        const req = {...requestBack,order}
+        setItem('requestBack',req)
+        dispatch(getPokemons(req))
         paginado(1)
     }
 
@@ -43,9 +45,10 @@ export default function Navbar({paginado}:Props){
             <img 
                 onClick={
                     ()=>{
+                        const req = {query:'',order:''}
                         navigate('/home')
-                        setItem('requestBack',{query:'',order:''})
-                        dispatch(getPokemons({query:'',order:''}))
+                        setItem('requestBack',req)
+                        dispatch(getPokemons(req))
                         paginado(1)
                     }
                 } 
@@ -56,7 +59,7 @@ export default function Navbar({paginado}:Props){
             <select name='types' onChange={handleQuery}>
                 <option value=''>Filter by type</option>
                 {
-                    types?.length&&types.map(type=><option id={type.id} value={type.name}>{type.name}</option>)
+                    types?.length&&types.map(type=><option id={type.id} key={type.id} value={type.name}>{type.name}</option>)
                 }
             </select>   
             <select onChange={handleSort} name='defense'>

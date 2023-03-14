@@ -1,0 +1,25 @@
+.loadingContainer{
+    min-height: 100vh; 
+    display: flex;
+    flex-direction: column ;
+    align-items: center;
+    justify-content: center; 
+    background-color: rgb(30, 37, 48);
+    overflow: hidden; 
+}
+.loadingContainer img{
+    /* width: 20rem; */
+    height: 18rem;
+    float: right;
+    bottom: 0;
+
+}
+.loadingContainer p{
+    color: aliceblue;
+    text-shadow: 0.3rem 0.3rem black ;
+    font-family: 'VT323', monospace;
+    letter-spacing: 0.10em;
+    font-size: 4rem;
+    
+    /* text-align: center; */
+}

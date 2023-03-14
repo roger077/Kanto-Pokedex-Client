@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import style from './searchBar.module.css'
 import {ChangeEvent} from 'react'
 import { Queries } from '../../Interfaces/queries.interface'
@@ -32,8 +32,8 @@ export default function SearchBar({handleQuery,queries,paginado}:Props){
 
     return(
         <div className={style.searchContainer}>
-        <input className={style.inpSearch} name="name" onChange={handleQuery} type='text' placeholder='Pokemon...'/>
-        <button className={style.btnSearch} onClick={handleClick} >Search</button>
-    </div>
+            <input className={style.inpSearch} name="name" onChange={handleQuery} type='text' placeholder='Pokemon...'/>
+            <button className={style.btnSearch} onClick={handleClick} >Search</button>
+        </div>
     )
 }

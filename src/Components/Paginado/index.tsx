@@ -22,13 +22,13 @@ export default function Paginado({currentPage,countPokemons,PokemonsPerPage,pagi
                         paginado(currentPage-1)
                     }
                 } 
-                value={'<<'}
+                value={'🡨'}
             />
             {
                 pageNumbers.map(
                     p=><input
                         type='button' 
-                        className={style.currentPag} 
+                        className={currentPage===p+1?style.currentPagSelect:style.currentPag} 
                         key={p} 
                         onClick={
                             ()=>paginado(p+1)
@@ -46,7 +46,7 @@ export default function Paginado({currentPage,countPokemons,PokemonsPerPage,pagi
                         paginado(currentPage+1)
                     }
                 } 
-                value={'>>'}                
+                value={'🡪'}                
             />
         </div>
     )

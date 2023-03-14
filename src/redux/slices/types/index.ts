@@ -18,7 +18,7 @@ export const getTypes=createAsyncThunk<Type[]>(
     "type/getTypes",
     async(_,thunkApi)=>{
         try{
-            const response :AxiosResponse = await axios.get("http://localhost:3001/type/");
+            const response :AxiosResponse = await axios.get("/type/");
             return response.data.Types;
         }catch(error){
             return thunkApi.rejectWithValue(error)

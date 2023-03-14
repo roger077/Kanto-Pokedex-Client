@@ -15,6 +15,7 @@ export default function Cards({currentPokemons}:Props){
                 currentPokemons?.length&&currentPokemons.map(poke=><Card
                     key={poke.id} 
                     id={poke.id}
+                    num = {poke.num}
                     name={poke.name} 
                     hp={poke.hp} 
                     defense={poke.defense}

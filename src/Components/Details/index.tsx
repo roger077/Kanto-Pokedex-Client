@@ -1,9 +1,11 @@
 import {useEffect} from "react";
 import { useParams } from "react-router-dom";
+import {Type} from "../../Interfaces/type.interface"
 import { useAppDispatch,useAppSelector } from "../../redux/store";
 import {getPokemonById,cleanDetails} from '../../redux/slices/pokemons';
 import style from './details.module.css'
 import { useNavigate } from "react-router-dom";
+import Loading from "../Loading";
 
 export default function Details(){
     const navigate = useNavigate();
@@ -34,9 +36,10 @@ export default function Details(){
                         <li><b>Speed:</b> {singlePokemon.speed}</li>
                         <li><b>Height:</b> {singlePokemon.height}</li>
                         <li><b>Weight:</b> {singlePokemon.weight}</li>
+                        <li><b>Types:</b> {singlePokemon.types.map((t:Type)=>t.name.charAt(0).toUpperCase() +t.name.slice(1)).join()}</li>
                     </ul>
                 </div>
             </div>
-        </div>:<p>Loading....</p>
+        </div>:<Loading/>
     )
 }

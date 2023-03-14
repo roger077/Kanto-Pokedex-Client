@@ -1,11 +1,8 @@
 import {createSlice,createAsyncThunk,PayloadAction} from '@reduxjs/toolkit'
 import axios,{AxiosResponse} from 'axios';
-
+import { BACK_END } from '../../../config/config';
 import {Pokemon} from '../../../Interfaces/pokemon.interface'
-import { Order } from '../../../Interfaces/orders.interface';
-import {useLocalStorage} from '../../../useLocalStorage'
 import {RequestBack} from '../../../Interfaces/requestBack.interface'
-//import {RequestBack} from '../requestStorage/index'
 interface PokeState {
     pokemons:Pokemon[]  |   null,
     allPokemons:Pokemon[]  |   null,
@@ -23,11 +20,9 @@ export const getPokemons=createAsyncThunk<Array<Pokemon>,RequestBack>(
     "pokemon/getPokemons",
     async(reqBack, thunkApi)=>{
         try{
-            //const [queryStorage,setQueryStorage]=useLocalStorage<string>('query');
-            //setQueryStorage(query);
             const {query,order}=reqBack;
-            console.log(query)
-            const response : AxiosResponse = await axios.get(`http://localhost:3001/pokemon?${query}&order=${order}`);
+            console.log(BACK_END)
+            const response : AxiosResponse = await axios.get(`/pokemon?${query}&order=${order.length?order:"num/ASC"}`);
             return response.data.Pokemons;
         }catch(error){
             return thunkApi.rejectWithValue(error)
@@ -39,7 +34,7 @@ export const getPokemonById=createAsyncThunk<Pokemon,string>(
     "pokemon/getPokemonById",
     async (id,thunkApi)=>{
         try{
-            const response:AxiosResponse=await axios.get("http://localhost:3001/pokemon/"+id)
+            const response:AxiosResponse=await axios.get("/pokemon/"+id)
             return response.data.Pokemon
         }catch(error){
             return thunkApi.rejectWithValue(error)
@@ -51,8 +46,8 @@ export const getAllPokemons=createAsyncThunk<Pokemon[]>(
     "pokemon/getAllPokemons",
     async(_,thunkApi)=>{
         try{
-            const response :AxiosResponse = await axios.get("http://localhost:3001/pokemon/");
-            return response.data.Pokemons;
+            const response :AxiosResponse = await axios.get("/pokemon/");
+            return response.data.Pokemons//.sort((a:Pokemon,b:Pokemon)=>a.num-b.num);
         }catch(error){
             return thunkApi.rejectWithValue(error)
         }
@@ -100,39 +95,37 @@ const pokeSlices = createSlice({
 
         builder.addCase(getPokemons.pending, (state)=>{
             state.loading=true;
-        }),
-        builder.addCase(getPokemons.fulfilled, (state,action)=>{
+        })
+        .addCase(getPokemons.fulfilled, (state,action)=>{
             state.pokemons=action.payload;
             state.loading=false;
-        }),
-        builder.addCase(getPokemons.rejected, (state,action)=>{
-            state.loading=false;
-            state.errors=action.payload;
-        }),
-
-        builder.addCase(getAllPokemons.pending, (state)=>{
-            state.loading=true;
-        }),
-        builder.addCase(getAllPokemons.fulfilled, (state,action)=>{
-            state.loading=false;
-            state.allPokemons=action.payload;
-        }),
-        builder.addCase(getAllPokemons.rejected, (state,action)=>{
-            state.loading=false;
-            state.errors=action.payload;
-        }),
-
-        builder.addCase(getPokemonById.pending, (state=>{
-            state.loading=true;
-        })),
-        builder.addCase(getPokemonById.fulfilled, (state,action)=>{
-            state.loading=false;
-            state.singlePokemon=action.payload;
-        }),
-        builder.addCase(getPokemonById.rejected, (state,action)=>{
+        })
+        .addCase(getPokemons.rejected, (state,action)=>{
             state.loading=false;
             state.errors=action.payload;
         })
+        .addCase(getAllPokemons.pending, (state)=>{
+            state.loading=true;
+        })
+        .addCase(getAllPokemons.fulfilled, (state,action)=>{
+            state.loading=false;
+            state.allPokemons=action.payload;
+        })
+        .addCase(getAllPokemons.rejected, (state,action)=>{
+            state.loading=false;
+            state.errors=action.payload;
+        })
+        .addCase(getPokemonById.pending, (state=>{
+            state.loading=true;
+        }))
+        .addCase(getPokemonById.fulfilled, (state,action)=>{
+            state.loading=false;
+            state.singlePokemon=action.payload;
+        })
+        .addCase(getPokemonById.rejected, (state,action)=>{
+            state.loading=false;
+            state.errors=action.payload;
+        });
     }
 })
 
