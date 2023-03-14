@@ -1,8 +1,8 @@
 import {createSlice,createAsyncThunk,PayloadAction} from '@reduxjs/toolkit'
 import axios,{AxiosResponse} from 'axios';
-import { BACK_END } from '../../../config/config';
 import {Pokemon} from '../../../Interfaces/pokemon.interface'
 import {RequestBack} from '../../../Interfaces/requestBack.interface'
+
 interface PokeState {
     pokemons:Pokemon[]  |   null,
     allPokemons:Pokemon[]  |   null,
@@ -21,7 +21,6 @@ export const getPokemons=createAsyncThunk<Array<Pokemon>,RequestBack>(
     async(reqBack, thunkApi)=>{
         try{
             const {query,order}=reqBack;
-            console.log(BACK_END)
             const response : AxiosResponse = await axios.get(`/pokemon?${query}&order=${order.length?order:"num/ASC"}`);
             return response.data.Pokemons;
         }catch(error){
@@ -94,7 +93,7 @@ const pokeSlices = createSlice({
     extraReducers(builder){
 
         builder.addCase(getPokemons.pending, (state)=>{
-            state.loading=true;
+            return {...state, loading:true};
         })
         .addCase(getPokemons.fulfilled, (state,action)=>{
             state.pokemons=action.payload;
